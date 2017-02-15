@@ -10,6 +10,8 @@
 To search GitHub repositories simply type `gh` then the name of the repository to search for.
 For example `gh preact`.
 
+![screenshot](./screenshot.png)
+
 ## Install
 
 Add `danielbayerlein/zazu-github` inside of plugins block of your `~/.zazurc.json` file.
