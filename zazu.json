@@ -1,0 +1,26 @@
+{
+  "name": "zazu-github",
+  "version": "1.0.0",
+  "description": "Search for GitHub repositories with github.com",
+  "icon": "icon.png",
+  "blocks": {
+    "input": [
+      {
+        "id": "github",
+        "type": "PrefixScript",
+        "prefix": "gh",
+        "space": true,
+        "args": "Required",
+        "script": "src/index.js",
+        "connections": ["Open"]
+      }
+    ],
+    "output": [
+      {
+        "id": "Open",
+        "type": "OpenInBrowser",
+        "url": "{value}"
+      }
+    ]
+  }
+}

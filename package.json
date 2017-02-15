@@ -1,0 +1,44 @@
+{
+  "name": "zazu-github",
+  "version": "1.0.0",
+  "description": "Zazu plugin to search for GitHub repositories with github.com",
+  "main": "src/index.js",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
+    "test": "npm run lint && jest",
+    "prepush": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielbayerlein/zazu-github.git"
+  },
+  "keywords": [
+    "zazu",
+    "github"
+  ],
+  "author": "Daniel Bayerlein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielbayerlein/zazu-github/issues"
+  },
+  "homepage": "https://github.com/danielbayerlein/zazu-github#readme",
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "husky": "^0.13.1",
+    "jest": "^18.1.0"
+  },
+  "dependencies": {
+    "got": "^6.7.1"
+  },
+  "jest": {
+    "bail": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/src/*.js"
+    ]
+  }
+}
