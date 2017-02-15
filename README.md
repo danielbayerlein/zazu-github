@@ -8,7 +8,7 @@
 ## Usage
 
 To search GitHub repositories simply type `gh` then the name of the repository to search for.
-For example `github preact`.
+For example `gh preact`.
 
 ## Install
 
