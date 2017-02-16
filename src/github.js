@@ -20,7 +20,7 @@ module.exports.search = (query) => {
       response.body.items.map(repository => (
         {
           title: repository.full_name,
-          value: repository.url,
+          value: repository.html_url,
           subtitle: repository.description,
         }
       ))
