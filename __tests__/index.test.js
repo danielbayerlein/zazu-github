@@ -4,14 +4,14 @@ const github = require('../src/github');
 describe('index.js', () => {
   beforeEach(() => {
     github.search = jest.fn();
-    index()('zazu');
+    index()('honeycomb');
   });
 
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  test('called github.search with zazu', () => {
-    expect(github.search).toBeCalledWith('zazu');
+  test('call github.search with "honeycomb"', () => {
+    expect(github.search).toBeCalledWith('honeycomb');
   });
 });
