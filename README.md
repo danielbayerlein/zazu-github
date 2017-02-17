@@ -1,6 +1,7 @@
 # zazu-github
 
-> [Zazu](https://github.com/tinytacoteam/zazu) plugin to search for GitHub repositories with [github.com](https://github.com)
+> [Zazu](https://github.com/tinytacoteam/zazu) plugin to search for GitHub repositories with [github.com](https://github.com).
+> The GitHub API rate limit allows you to make up to 10 requests per minute.
 
 [![Build Status](https://travis-ci.org/danielbayerlein/zazu-github.svg?branch=master)](https://travis-ci.org/danielbayerlein/zazu-github)
 [![codecov](https://codecov.io/gh/danielbayerlein/zazu-github/branch/master/graph/badge.svg)](https://codecov.io/gh/danielbayerlein/zazu-github)
