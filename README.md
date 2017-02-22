@@ -15,7 +15,7 @@ For example `gh preact`.
 
 ## Install
 
-Add `danielbayerlein/zazu-github` inside of plugins block of your `~/.zazurc.json` file.
+Add `danielbayerlein/zazu-github` inside of `plugins` block of your `~/.zazurc.json` file.
 
 ```json
 {
