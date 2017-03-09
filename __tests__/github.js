@@ -89,7 +89,7 @@ describe('github.js', () => {
       })));
 
       return github.search('honeycomb')
-        .catch(() => {
+        .then(() => {
           // eslint-disable-next-line no-console
           expect(console.error).toHaveBeenCalledWith(body);
         });
