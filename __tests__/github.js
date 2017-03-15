@@ -23,7 +23,7 @@ describe('github.js', () => {
 
       jest.mock('cache-conf');
       cache = { get: jest.fn(), isExpired: jest.fn(), set: jest.fn() };
-      require('cache-conf').mockImplementation(() => (cache));
+      require('cache-conf').mockImplementation(() => cache);
 
       github = require('../src/github');
 
