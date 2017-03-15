@@ -1,8 +1,23 @@
 const got = require('got');
+const CacheConf = require('cache-conf');
 
 const URL = 'https://api.github.com/search/repositories';
 const RESULT_ITEMS = 10;
 
+const CACHE_CONF = {
+  key: 'zazu-github', // cache key prefix
+  maxAge: 3600000, // 1 hour
+};
+
+const cache = new CacheConf();
+
+/**
+ * Fetch the URL, cache the result and return it.
+ * Returns the cache result if it is valid.
+ *
+ * @param  {string}  query Search query
+ * @return {Promise}       Returns a promise that is fulfilled with the JSON result
+ */
 module.exports.search = (query) => {
   const options = {
     json: true,
@@ -15,17 +30,32 @@ module.exports.search = (query) => {
     },
   };
 
-  return got(URL, options)
-    .then(response => (
-      response.body.items.map(repository => (
-        {
+  const cacheKey = `${CACHE_CONF.key}.${query}`;
+  const cachedResponse = cache.get(cacheKey, { ignoreMaxAge: true });
+
+  if (cachedResponse && !cache.isExpired(cacheKey)) {
+    return Promise.resolve(cachedResponse);
+  }
+
+  return new Promise((resolve, reject) => (
+    got(URL, options)
+      .then((response) => {
+        const data = response.body.items.map(repository => ({
           title: repository.full_name,
           value: repository.html_url,
           subtitle: repository.description,
+        }));
+
+        cache.set(cacheKey, data, { maxAge: CACHE_CONF.maxAge });
+
+        resolve(data);
+      })
+      .catch((error) => {
+        if (cachedResponse) {
+          resolve(cachedResponse);
         }
-      ))
-    ))
-    .catch((error) => {
-      console.error(error.response.body); // eslint-disable-line no-console
-    });
+
+        reject(error);
+      })
+  ));
 };

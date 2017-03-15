@@ -1,3 +1,5 @@
+/* eslint global-require: 0 */
+
 describe('github.js', () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -7,15 +9,25 @@ describe('github.js', () => {
   describe('search', () => {
     let got;
     let github;
+    let cache;
+
+    const mockResult = require('../__mocks__/result.json').items.map(repository => ({
+      title: repository.full_name,
+      value: repository.html_url,
+      subtitle: repository.description,
+    }));
 
     beforeEach(() => {
       jest.mock('got');
-      got = require('got'); // eslint-disable-line global-require
-      github = require('../src/github'); // eslint-disable-line global-require
-      console.error = jest.fn(); // eslint-disable-line no-console
+      got = require('got');
+
+      jest.mock('cache-conf');
+      cache = { get: jest.fn(), isExpired: jest.fn(), set: jest.fn() };
+      require('cache-conf').mockImplementation(() => (cache));
+
+      github = require('../src/github');
 
       got.mockImplementation(() => new Promise(resolve => resolve({
-        // eslint-disable-next-line global-require
         body: require('../__mocks__/result.json'),
       })));
     });
@@ -41,22 +53,22 @@ describe('github.js', () => {
 
     test('returns an array', () => (
       github.search('honeycomb')
-        .then((packages) => {
-          expect(packages).toBeInstanceOf(Array);
+        .then((repositories) => {
+          expect(repositories).toBeInstanceOf(Array);
         })
       ));
 
     test('returns the expected title', () => (
       github.search('honeycomb')
-        .then((packages) => {
-          expect(packages[0].title).toBe('altamiracorp/honeycomb');
+        .then((repositories) => {
+          expect(repositories[0].title).toBe('altamiracorp/honeycomb');
         })
       ));
 
     test('returns the expected value', () => (
       github.search('honeycomb')
-        .then((packages) => {
-          expect(packages[0].value).toBe(
+        .then((repositories) => {
+          expect(repositories[0].value).toBe(
             'https://github.com/altamiracorp/honeycomb',
           );
         })
@@ -64,12 +76,12 @@ describe('github.js', () => {
 
     test('returns the expected subtitle', () => (
       github.search('honeycomb')
-        .then((packages) => {
-          expect(packages[0].subtitle).toBe('MySql storage engine for the cloud');
+        .then((repositories) => {
+          expect(repositories[0].subtitle).toBe('MySql storage engine for the cloud');
         })
     ));
 
-    test('call console.error with an error message', () => {
+    test('returns the expected error', () => {
       const body = `
         {
           "message": "Validation Failed",
@@ -89,39 +101,90 @@ describe('github.js', () => {
       })));
 
       return github.search('honeycomb')
+        .catch((repositories) => {
+          expect(repositories.response.body).toBe(body);
+        });
+    });
+
+    test('call cache.get with the expected arguments', () => (
+      github.search('honeycomb')
         .then(() => {
-          // eslint-disable-next-line no-console
-          expect(console.error).toHaveBeenCalledWith(body);
+          expect(cache.get).toBeCalledWith(
+            'zazu-github.honeycomb',
+            { ignoreMaxAge: true },
+          );
+        })
+    ));
+
+    test('call cache.set with the expected arguments', () => (
+      github.search('honeycomb')
+        .then(() => {
+          expect(cache.set).toBeCalledWith(
+            'zazu-github.honeycomb',
+            mockResult,
+            { maxAge: 3600000 },
+          );
+        })
+    ));
+
+    test('call cache.isExpired with the expected argument', () => {
+      cache.get = jest.fn(() => mockResult);
+
+      return github.search('honeycomb')
+        .then(() => {
+          expect(cache.isExpired).toBeCalledWith('zazu-github.honeycomb');
+        });
+    });
+
+    test('returns the cache result', () => {
+      cache.isExpired = jest.fn(() => false);
+      cache.get = jest.fn(() => mockResult);
+
+      return github.search('honeycomb')
+        .then((repositories) => {
+          expect(repositories).toEqual(mockResult);
+        });
+    });
+
+    test('returns the cache result when an error occurs', () => {
+      cache.isExpired = jest.fn(() => true);
+      cache.get = jest.fn(() => mockResult);
+      got.mockImplementation(() => new Promise((resolve, reject) => reject()));
+
+      return github.search('honeycomb')
+        .then((repositories) => {
+          expect(repositories).toEqual(mockResult);
         });
     });
   });
 
   describe('integration', () => {
-    // eslint-disable-next-line global-require
+    jest.mock('cache-conf');
+
     const github = require('../src/github');
     const searchResult = github.search('honeycomb');
 
     test('returns an array', () => (
-      searchResult.then((packages) => {
-        expect(packages).toBeInstanceOf(Array);
+      searchResult.then((repositories) => {
+        expect(repositories).toBeInstanceOf(Array);
       })
     ));
 
     test('returns an object with a title', () => (
-      searchResult.then((packages) => {
-        expect(packages[0].title).toBeDefined();
+      searchResult.then((repositories) => {
+        expect(repositories[0].title).toBeDefined();
       })
     ));
 
     test('returns an object with a value', () => (
-      searchResult.then((packages) => {
-        expect(packages[0].value).toBeDefined();
+      searchResult.then((repositories) => {
+        expect(repositories[0].value).toBeDefined();
       })
     ));
 
     test('returns an object with a subtitle', () => (
-      searchResult.then((packages) => {
-        expect(packages[0].subtitle).toBeDefined();
+      searchResult.then((repositories) => {
+        expect(repositories[0].subtitle).toBeDefined();
       })
     ));
   });
