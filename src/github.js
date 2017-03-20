@@ -41,6 +41,7 @@ module.exports.search = (query) => {
     got(URL, options)
       .then((response) => {
         const data = response.body.items.map(repository => ({
+          id: repository.full_name,
           title: repository.full_name,
           value: repository.html_url,
           subtitle: repository.description,

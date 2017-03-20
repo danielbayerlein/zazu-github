@@ -12,6 +12,7 @@ describe('github.js', () => {
     let cache;
 
     const mockResult = require('../__mocks__/result.json').items.map(repository => ({
+      id: repository.full_name,
       title: repository.full_name,
       value: repository.html_url,
       subtitle: repository.description,
@@ -55,6 +56,13 @@ describe('github.js', () => {
       github.search('honeycomb')
         .then((repositories) => {
           expect(repositories).toBeInstanceOf(Array);
+        })
+      ));
+
+    test('returns the expected id', () => (
+      github.search('honeycomb')
+        .then((repositories) => {
+          expect(repositories[0].id).toBe('altamiracorp/honeycomb');
         })
       ));
 
@@ -167,6 +175,12 @@ describe('github.js', () => {
     test('returns an array', () => (
       searchResult.then((repositories) => {
         expect(repositories).toBeInstanceOf(Array);
+      })
+    ));
+
+    test('returns an object with a id', () => (
+      searchResult.then((repositories) => {
+        expect(repositories[0].id).toBeDefined();
       })
     ));
 
