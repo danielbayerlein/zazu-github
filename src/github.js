@@ -1,4 +1,5 @@
 const got = require('got');
+const emoji = require('node-emoji');
 const CacheConf = require('cache-conf');
 
 const URL = 'https://api.github.com/search/repositories';
@@ -44,7 +45,7 @@ module.exports.search = (query) => {
           id: repository.full_name,
           title: repository.full_name,
           value: repository.html_url,
-          subtitle: repository.description,
+          subtitle: emoji.emojify(repository.description),
         }));
 
         cache.set(cacheKey, data, { maxAge: CACHE_CONF.maxAge });
