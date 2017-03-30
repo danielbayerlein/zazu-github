@@ -1,6 +1,6 @@
 {
   "name": "zazu-github",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Search for GitHub repositories with github.com",
   "icon": "icon.png",
   "blocks": {
