@@ -11,11 +11,12 @@ describe('github.js', () => {
     let github;
     let cache;
 
+    const emoji = require('node-emoji');
     const mockResult = require('../__mocks__/result.json').items.map(repository => ({
       id: repository.full_name,
       title: repository.full_name,
       value: repository.html_url,
-      subtitle: repository.description,
+      subtitle: emoji.emojify(repository.description),
     }));
 
     beforeEach(() => {
@@ -34,13 +35,13 @@ describe('github.js', () => {
     });
 
     test('call got with url and options', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then(() => {
           expect(got).toHaveBeenCalledWith(
             'https://api.github.com/search/repositories',
             {
               query: {
-                q: 'honeycomb',
+                q: 'preact',
                 per_page: 10,
               },
               json: true,
@@ -53,39 +54,39 @@ describe('github.js', () => {
     ));
 
     test('returns an array', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then((repositories) => {
           expect(repositories).toBeInstanceOf(Array);
         })
       ));
 
     test('returns the expected id', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then((repositories) => {
-          expect(repositories[0].id).toBe('altamiracorp/honeycomb');
+          expect(repositories[0].id).toBe('developit/preact');
         })
       ));
 
     test('returns the expected title', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then((repositories) => {
-          expect(repositories[0].title).toBe('altamiracorp/honeycomb');
+          expect(repositories[0].title).toBe('developit/preact');
         })
       ));
 
     test('returns the expected value', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then((repositories) => {
-          expect(repositories[0].value).toBe(
-            'https://github.com/altamiracorp/honeycomb',
-          );
+          expect(repositories[0].value).toBe('https://github.com/developit/preact');
         })
       ));
 
     test('returns the expected subtitle', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then((repositories) => {
-          expect(repositories[0].subtitle).toBe('MySql storage engine for the cloud');
+          expect(repositories[0].subtitle).toBe(
+            '⚛️ Fast 3kb React alternative with the same ES6 API. Components & Virtual DOM.',
+          );
         })
     ));
 
@@ -108,27 +109,27 @@ describe('github.js', () => {
         response: { body },
       })));
 
-      return github.search('honeycomb')
+      return github.search('preact')
         .catch((repositories) => {
           expect(repositories.response.body).toBe(body);
         });
     });
 
     test('call cache.get with the expected arguments', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then(() => {
           expect(cache.get).toBeCalledWith(
-            'zazu-github.honeycomb',
+            'zazu-github.preact',
             { ignoreMaxAge: true },
           );
         })
     ));
 
     test('call cache.set with the expected arguments', () => (
-      github.search('honeycomb')
+      github.search('preact')
         .then(() => {
           expect(cache.set).toBeCalledWith(
-            'zazu-github.honeycomb',
+            'zazu-github.preact',
             mockResult,
             { maxAge: 3600000 },
           );
@@ -138,9 +139,9 @@ describe('github.js', () => {
     test('call cache.isExpired with the expected argument', () => {
       cache.get = jest.fn(() => mockResult);
 
-      return github.search('honeycomb')
+      return github.search('preact')
         .then(() => {
-          expect(cache.isExpired).toBeCalledWith('zazu-github.honeycomb');
+          expect(cache.isExpired).toBeCalledWith('zazu-github.preact');
         });
     });
 
@@ -148,7 +149,7 @@ describe('github.js', () => {
       cache.isExpired = jest.fn(() => false);
       cache.get = jest.fn(() => mockResult);
 
-      return github.search('honeycomb')
+      return github.search('preact')
         .then((repositories) => {
           expect(repositories).toEqual(mockResult);
         });
@@ -159,7 +160,7 @@ describe('github.js', () => {
       cache.get = jest.fn(() => mockResult);
       got.mockImplementation(() => new Promise((resolve, reject) => reject()));
 
-      return github.search('honeycomb')
+      return github.search('preact')
         .then((repositories) => {
           expect(repositories).toEqual(mockResult);
         });
@@ -170,7 +171,7 @@ describe('github.js', () => {
     jest.mock('cache-conf');
 
     const github = require('../src/github');
-    const searchResult = github.search('honeycomb');
+    const searchResult = github.search('preact');
 
     test('returns an array', () => (
       searchResult.then((repositories) => {
