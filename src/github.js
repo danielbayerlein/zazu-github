@@ -1,16 +1,16 @@
-const got = require('got');
-const emoji = require('node-emoji');
-const CacheConf = require('cache-conf');
+const got = require('got')
+const emoji = require('node-emoji')
+const CacheConf = require('cache-conf')
 
-const URL = 'https://api.github.com/search/repositories';
-const RESULT_ITEMS = 10;
+const URL = 'https://api.github.com/search/repositories'
+const RESULT_ITEMS = 10
 
 const CACHE_CONF = {
   key: 'zazu-github', // cache key prefix
-  maxAge: 3600000, // 1 hour
-};
+  maxAge: 3600000 // 1 hour
+}
 
-const cache = new CacheConf();
+const cache = new CacheConf()
 
 /**
  * Fetch the URL, cache the result and return it.
@@ -24,40 +24,40 @@ module.exports.search = (query) => {
     json: true,
     query: {
       q: query,
-      per_page: RESULT_ITEMS,
+      per_page: RESULT_ITEMS
     },
     headers: {
-      accept: 'application/vnd.github.v3+json',
-    },
-  };
+      accept: 'application/vnd.github.v3+json'
+    }
+  }
 
-  const cacheKey = `${CACHE_CONF.key}.${query}`;
-  const cachedResponse = cache.get(cacheKey, { ignoreMaxAge: true });
+  const cacheKey = `${CACHE_CONF.key}.${query}`
+  const cachedResponse = cache.get(cacheKey, { ignoreMaxAge: true })
 
   if (cachedResponse && !cache.isExpired(cacheKey)) {
-    return Promise.resolve(cachedResponse);
+    return Promise.resolve(cachedResponse)
   }
 
   return new Promise((resolve, reject) => (
     got(URL, options)
       .then((response) => {
-        const data = response.body.items.map(repository => ({
+        const data = response.body.items.map((repository) => ({
           id: repository.full_name,
           title: repository.full_name,
           value: repository.html_url,
-          subtitle: emoji.emojify(repository.description),
-        }));
+          subtitle: emoji.emojify(repository.description)
+        }))
 
-        cache.set(cacheKey, data, { maxAge: CACHE_CONF.maxAge });
+        cache.set(cacheKey, data, { maxAge: CACHE_CONF.maxAge })
 
-        resolve(data);
+        resolve(data)
       })
-      .catch((error) => {
+      .catch((err) => {
         if (cachedResponse) {
-          resolve(cachedResponse);
+          resolve(cachedResponse)
         }
 
-        reject(error);
+        reject(err)
       })
-  ));
-};
+  ))
+}

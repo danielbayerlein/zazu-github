@@ -5,8 +5,9 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "lint": "eslint --format=node_modules/eslint-formatter-pretty .",
-    "test": "npm run lint && jest",
+    "lint": "standard --verbose | snazzy",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "jest",
     "prepush": "npm test"
   },
   "repository": {
@@ -24,12 +25,10 @@
   },
   "homepage": "https://github.com/danielbayerlein/zazu-github#readme",
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.1.2",
-    "eslint-formatter-pretty": "^1.1.0",
-    "eslint-plugin-import": "^2.2.0",
     "husky": "^0.13.3",
-    "jest": "^19.0.2"
+    "jest": "^19.0.2",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.1"
   },
   "dependencies": {
     "cache-conf": "^0.5.0",
@@ -42,5 +41,10 @@
     "collectCoverageFrom": [
       "**/src/*.js"
     ]
+  },
+  "standard": {
+    "env": {
+      "jest": true
+    }
   }
 }

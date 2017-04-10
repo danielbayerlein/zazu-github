@@ -5,6 +5,7 @@
 
 [![Build Status](https://travis-ci.org/danielbayerlein/zazu-github.svg?branch=master)](https://travis-ci.org/danielbayerlein/zazu-github)
 [![codecov](https://codecov.io/gh/danielbayerlein/zazu-github/branch/master/graph/badge.svg)](https://codecov.io/gh/danielbayerlein/zazu-github)
+[![Greenkeeper badge](https://badges.greenkeeper.io/danielbayerlein/zazu-uptime.svg)](https://greenkeeper.io/)
 
 ## Usage
 

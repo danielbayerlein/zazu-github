@@ -1,3 +1,3 @@
-const github = require('./github');
+const github = require('./github')
 
-module.exports = () => name => github.search(name);
+module.exports = () => name => github.search(name)
