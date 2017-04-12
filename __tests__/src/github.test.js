@@ -10,7 +10,7 @@ describe('github.js', () => {
     let cache
 
     const emoji = require('node-emoji')
-    const mockResult = require('../__mocks__/result.json').items.map((repository) => ({
+    const mockResult = require('../../__mocks__/result.json').items.map((repository) => ({
       id: repository.full_name,
       title: repository.full_name,
       value: repository.html_url,
@@ -25,10 +25,10 @@ describe('github.js', () => {
       cache = { get: jest.fn(), isExpired: jest.fn(), set: jest.fn() }
       require('cache-conf').mockImplementation(() => cache)
 
-      github = require('../src/github')
+      github = require('../../src/github')
 
       got.mockImplementation(() => new Promise((resolve) => resolve({
-        body: require('../__mocks__/result.json')
+        body: require('../../__mocks__/result.json')
       })))
     })
 
@@ -171,7 +171,7 @@ describe('github.js', () => {
   describe('integration', () => {
     jest.mock('cache-conf')
 
-    const github = require('../src/github')
+    const github = require('../../src/github')
     const searchResult = github.search('preact')
 
     test('returns an array', () => (

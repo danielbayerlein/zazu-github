@@ -1,5 +1,5 @@
-const index = require('../src/')
-const github = require('../src/github')
+const index = require('../../src/')
+const github = require('../../src/github')
 
 describe('index.js', () => {
   beforeEach(() => {
