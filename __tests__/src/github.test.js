@@ -45,7 +45,8 @@ describe('github.js', () => {
               json: true,
               headers: {
                 accept: 'application/vnd.github.v3+json'
-              }
+              },
+              useElectronNet: false
             }
           )
         })

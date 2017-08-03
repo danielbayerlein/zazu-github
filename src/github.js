@@ -28,7 +28,8 @@ module.exports.search = (query) => {
     },
     headers: {
       accept: 'application/vnd.github.v3+json'
-    }
+    },
+    useElectronNet: false
   }
 
   const cacheKey = `${CACHE_CONF.key}.${query}`
