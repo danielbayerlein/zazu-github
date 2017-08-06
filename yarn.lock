@@ -1986,12 +1986,11 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
 
-node-emoji@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.7.0.tgz#a400490aac409b616d13941532200f128af037f9"
+node-emoji@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.8.1.tgz#6eec6bfb07421e2148c75c6bba72421f8530a826"
   dependencies:
     lodash.toarray "^4.4.0"
-    string.prototype.codepointat "^0.2.0"
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -2600,10 +2599,6 @@ string-width@^2.0.0:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^3.0.0"
-
-string.prototype.codepointat@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/string.prototype.codepointat/-/string.prototype.codepointat-0.2.0.tgz#6b26e9bd3afcaa7be3b4269b526de1b82000ac78"
 
 string_decoder@~1.0.0:
   version "1.0.0"
