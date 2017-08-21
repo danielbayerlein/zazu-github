@@ -43,8 +43,8 @@
     ]
   },
   "standard": {
-    "env": {
-      "jest": true
-    }
+    "env": [
+      "jest"
+    ]
   }
 }
