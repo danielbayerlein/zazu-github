@@ -397,11 +397,11 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
-cache-conf@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/cache-conf/-/cache-conf-0.5.0.tgz#681c42ed1771ead2bc23632a75d3cd8dc7945c59"
+cache-conf@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/cache-conf/-/cache-conf-0.6.0.tgz#207a70bb5b47e621e723bddb23fe20c0e1ae2cbc"
   dependencies:
-    conf "^0.12.0"
+    conf "^1.2.0"
     pkg-up "^1.0.0"
 
 caller-path@^0.1.0:
@@ -525,14 +525,15 @@ concat-stream@^1.5.0, concat-stream@^1.5.2:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-conf@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/conf/-/conf-0.12.0.tgz#8498c599e2487fec703505d181c113875b8c310c"
+conf@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/conf/-/conf-1.2.0.tgz#149af7408f0af6abd62c3e24cff747e41a0bc54f"
   dependencies:
     dot-prop "^4.1.0"
     env-paths "^1.0.0"
-    mkdirp "^0.5.1"
-    pkg-up "^1.0.0"
+    make-dir "^1.0.0"
+    pkg-up "^2.0.0"
+    write-file-atomic "^2.3.0"
 
 console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
@@ -2107,6 +2108,12 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+make-dir@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.0.0.tgz#97a011751e91dd87cfadef58832ebb04936de978"
+  dependencies:
+    pify "^2.3.0"
+
 makeerror@1.0.x:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/makeerror/-/makeerror-1.0.11.tgz#e01a5c9109f2af79660e4e8b9587790184f5a96c"
@@ -2451,7 +2458,7 @@ performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
-pify@^2.0.0:
+pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
@@ -2495,6 +2502,12 @@ pkg-up@^1.0.0:
   resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-1.0.0.tgz#3e08fb461525c4421624a33b9f7e6d0af5b05a26"
   dependencies:
     find-up "^1.0.0"
+
+pkg-up@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-2.0.0.tgz#c819ac728059a461cab1c3889a2be3c49a004d7f"
+  dependencies:
+    find-up "^2.1.0"
 
 pluralize@^1.2.1:
   version "1.2.1"
@@ -3297,7 +3310,7 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-write-file-atomic@^2.1.0:
+write-file-atomic@^2.1.0, write-file-atomic@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-2.3.0.tgz#1ff61575c2e2a4e8e510d6fa4e243cce183999ab"
   dependencies:
