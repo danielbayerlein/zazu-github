@@ -26,7 +26,7 @@
   "homepage": "https://github.com/danielbayerlein/zazu-github#readme",
   "devDependencies": {
     "husky": "^0.14.3",
-    "jest": "^21.2.0",
+    "jest": "^21.2.1",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },
