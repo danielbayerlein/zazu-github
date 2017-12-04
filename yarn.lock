@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@sindresorhus/is@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.6.0.tgz#383f456b26bc96c7889f0332079f4358b16c58dc"
+
 abab@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -1316,23 +1320,22 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-got@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/got/-/got-8.0.0.tgz#57a11f841edc58e3f3eba4b3ac220faf5133770f"
+got@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/got/-/got-8.0.1.tgz#6d7f8bb3eb99e5af912efe26a104476441e08e7f"
   dependencies:
+    "@sindresorhus/is" "^0.6.0"
     cacheable-request "^2.1.1"
     decompress-response "^3.3.0"
     duplexer3 "^0.1.4"
     get-stream "^3.0.0"
     into-stream "^3.1.0"
-    is-plain-obj "^1.1.0"
     is-retry-allowed "^1.1.0"
-    is-stream "^1.1.0"
     isurl "^1.0.0-alpha5"
     lowercase-keys "^1.0.0"
     mimic-response "^1.0.0"
     p-cancelable "^0.3.0"
-    p-timeout "^1.2.0"
+    p-timeout "^2.0.1"
     pify "^3.0.0"
     safe-buffer "^5.1.1"
     timed-out "^4.0.1"
@@ -1619,7 +1622,7 @@ is-path-inside@^1.0.0:
   dependencies:
     path-is-inside "^1.0.1"
 
-is-plain-obj@^1.0.0, is-plain-obj@^1.1.0:
+is-plain-obj@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
@@ -2465,9 +2468,9 @@ p-locate@^2.0.0:
   dependencies:
     p-limit "^1.1.0"
 
-p-timeout@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-1.2.0.tgz#9820f99434c5817868b4f34809ee5291660d5b6c"
+p-timeout@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-2.0.1.tgz#d8dd1979595d2dc0139e1fe46b8b646cb3cdf038"
   dependencies:
     p-finally "^1.0.0"
 
